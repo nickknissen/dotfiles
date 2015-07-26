@@ -10,3 +10,4 @@ Requirements:
  * [RVM](https://rvm.io/)
  * [i3-haps](https://github.com/Airblader/i3)
  * [tig](https://github.com/jonas/tig)
+ * [vim](http://www.vim.org/)

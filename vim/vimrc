@@ -1,0 +1,49 @@
+syntax enable
+
+" show line numbers
+set number
+
+" set tabs to have 4 spaces
+set ts=4
+
+" indent when moving to the next line while writing code
+set autoindent
+
+" expand tabs into spaces
+set expandtab
+
+" when using the >> or << commands, shift lines by 4 spaces
+set shiftwidth=4
+
+" show a visual line under the cursor's current line 
+set cursorline
+
+" show the matching part of the pair for [] {} and ()
+set showmatch
+
+" enable all Python syntax highlighting features
+let python_highlight_all = 1 
+let g:pymode_rope = 1
+let g:pymode_rope_complete_on_dot = 1
+" Pathogen load
+filetype off 
+
+call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on
+
+
+if has("autocmd")
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+
+    " Rebase shortcuts, press P, R, E, S, F to change the current line to the
+    " given command. Press C to cycle through available commands.
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> P :Pick<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> R :Reword<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> E :Edit<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> S :Squash<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> F :Fixup<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> C :Cycle<cr>
+end
+
