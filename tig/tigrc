@@ -1,0 +1,13 @@
+bind main B !git rebase -i %(commit) # Interactive rebase
+
+bind status P !git push origin
+bind status S !?git stash save --keep-index %(prompt)
+bind status D !@?rm %(file) #delete selected file
+
+bind refs n !@git branch "%(prompt Enter branch name: )" # create new branch
+
+bind stash A !?git stash apply %(stash)  # apply selected stash                                                                                    
+
+set main-view = id date author commit-title:graph=yes,refs=yes
+set stash-view  = id date:default author:email-user commit-title
+
