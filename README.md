@@ -13,3 +13,5 @@ Requirements:
  * [tig](https://github.com/jonas/tig)
  * [vim](http://www.vim.org/)
  * [Git](https://git-scm.com/)
+   * [Arc Theme](https://github.com/horst3180/Arc-theme)
+   * [Paper icons from Dorian](http://killhellokitty.deviantart.com/art/Dorian-theme-3-14-version-12-494426768)
