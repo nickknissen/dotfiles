@@ -1,20 +1,23 @@
-# Path to your oh-my-zsh installation.
 export ZSH=/home/nkn/.oh-my-zsh
+export GOPATH=$HOME/go
+
+TH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s 
+$PATH
+/usr/local/sbin
+/usr/local/bin
+/usr/sbin
+/usr/bin
+/sbin
+/bin
+$HOME/.rvm/bin
+$HOME/bin
+EOF`
 
 ZSH_THEME="bureau"
 
 plugins=(git rvm node rvm ubuntu composer docker go httpie laravel4 laravel5 npm bower virtualenv vagrant docker-compose pip pep8 sudo)
 
-# User configuration
-
-export PATH="/home/nkn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-
 source $ZSH/oh-my-zsh.sh
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
-
-[ -s "/home/nkn/.dnx/dnvm/dnvm.sh" ] && . "/home/nkn/.dnx/dnvm/dnvm.sh" # Load dnvm
-
-
+[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm" 
+[ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh" # Load dnvm
