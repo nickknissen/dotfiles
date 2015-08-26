@@ -11,6 +11,7 @@ $PATH
 /bin
 $HOME/.rvm/bin
 $HOME/bin
+$HOME/go/bin
 EOF`
 
 ZSH_THEME="bureau"
