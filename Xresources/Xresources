@@ -1,0 +1,30 @@
+! set 256 color mode
+URxvt.termName: rxvt-256color
+
+#include "/home/nkn/dotfiles/Xresources/base16-ocean.dark.256.xresources"
+
+*.font: xft:Source Code Pro:style=Regular:pixelsize=11
+*.boldFont: xft:Source Code Pro:style=Regular:pixelsize=12
+
+URxvt.scrollBar: false
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: true
+URxvt.internalBorder: 8
+! urxvt perl extensions
+URxvt.perl-ext-common: default,matcher,url-select
+! open url in browser
+URxvt.url-launcher: /usr/bin/google-chrome
+URxvt.matcher.button: 1
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/google-chrome
+URxvt.url-select.underline: true
+
+! Font options
+Xft.dpi: 96
+!Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+

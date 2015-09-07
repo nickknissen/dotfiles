@@ -2,7 +2,7 @@
 
 
 # {{{ Keys
-set $mod Mod1
+set $mod Mod4
 set $up k
 set $down j
 set $left h
@@ -24,7 +24,7 @@ client.urgent           #dc322f #dc322f #282828 #dc322f
 # }}}
 
 # {{{ Keybindings
-bindsym $mod+Return           exec terminator
+bindsym $mod+Return           exec urxvt
 bindsym $mod+Shift+Return     exec ~/scripts/visual.sh
 bindsym $mod+d                exec dmenu_run
 bindsym $mod+Shift+e          exec --no-startup-id ~/scripts/logout-menu.sh

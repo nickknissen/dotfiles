@@ -6,6 +6,7 @@ My personal dotfiles.
 This uses [Dottrix](https://gitlab.com/dennis.hamester/dotrix) to handle symlinks.
 
 Requirements:
+ * [rxvt-unicode](https://wiki.archlinux.org/index.php/Rxvt-unicode)
  * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
  * [RVM](https://rvm.io/)
  * [i3-haps](https://github.com/Airblader/i3)
