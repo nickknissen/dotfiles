@@ -10,8 +10,10 @@ URxvt.scrollBar: false
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: true
 URxvt.internalBorder: 8
+
 ! urxvt perl extensions
-URxvt.perl-ext-common: default,matcher,url-select
+URxvt.perl-ext-common: default,matcher,url-select,clipboard
+
 ! open url in browser
 URxvt.url-launcher: /usr/bin/google-chrome
 URxvt.matcher.button: 1
@@ -19,12 +21,21 @@ URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/google-chrome
 URxvt.url-select.underline: true
 
+URxvt.iso14755: False
+!URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.clipboard.autocopy: true
+
 ! Font options
 Xft.dpi: 96
+
 !Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
+
 
