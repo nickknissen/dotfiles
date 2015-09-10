@@ -6,6 +6,7 @@ bind status P !git push origin
 bind status S !?git stash save --keep-index %(prompt)
 bind status D !@?rm %(file) #delete selected file
 bind status N !git commit --no-verify
+bind status A !git commit --amend --no-verify
 
 bind refs n !@git branch "%(prompt Enter branch name: )" # create new branch
 
