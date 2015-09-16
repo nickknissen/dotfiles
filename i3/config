@@ -13,7 +13,7 @@ floating_modifier $mod
 
 # {{{ Theme
 font pango:Source Code Pro 11
-new_window pixel 5
+new_window pixel 4
 gaps inner 10
 
                         #border backgr. text    indicator
@@ -91,6 +91,7 @@ mode "resize" {
 }
 # }}}
 
+
 # {{{ Bar
 bar {
     position top
@@ -108,7 +109,26 @@ bar {
         urgent_workspace   #dc322f #dc322f #002b36
     }
 }
-# }}} }}}
+# }}}
 
+# {{{ Startup
 exec_always --no-startup-id "feh --bg-scale ~/Pictures/Minimalist-Hexagon-Wallpaper.jpg"
 exec --no-startup-id "pidgin"
+# }}}
+
+# {{{ shutdown etc.
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+# }}}
