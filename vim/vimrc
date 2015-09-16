@@ -1,3 +1,4 @@
+set nocompatible
 syntax enable
 
 " show line numbers
@@ -21,19 +22,23 @@ set cursorline
 " show the matching part of the pair for [] {} and ()
 set showmatch
 
-" enable all Python syntax highlighting features
-let python_highlight_all = 1 
-let g:pymode_rope = 1
-let g:pymode_rope_complete_on_dot = 1
-" Pathogen load
-filetype off 
-
-call pathogen#infect()
-call pathogen#helptags()
-
-filetype plugin indent on
+" Searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set nospell
 
 
+" Viewport
+set ruler
+set number
+
+" History
+set history=500
+set undolevels=500
+
+" Vim - easier rebase
 if has("autocmd")
     autocmd Filetype gitcommit setlocal spell textwidth=72
 
@@ -47,3 +52,41 @@ if has("autocmd")
     autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> C :Cycle<cr>
 end
 
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Vundle
+filetype off 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'stephpy/vim-yaml'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'klen/python-mode'
+
+call vundle#end()
+
+" Pathogen load
+call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on
+
+
+" enable all Python syntax highlighting features
+let python_highlight_all = 1 
+let g:pymode_rope = 1
+let g:pymode_rope_complete_on_dot = 1
+
+" Syntastic - Customize php settings
+let g:syntastic_php_phpcs_args = '--report=csv --standard=PSR2 --encoding=utf-8'
