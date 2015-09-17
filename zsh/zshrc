@@ -1,18 +1,11 @@
 export ZSH=/home/nkn/.oh-my-zsh
 export GOPATH=$HOME/go
 
-TH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s 
+PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s 
 $PATH
-/usr/local/sbin
-/usr/local/bin
-/usr/sbin
-/usr/bin
-/sbin
-/bin
-$HOME/.rvm/bin
-$HOME/bin
-$HOME/go/bin
+$GOPATH/bin
 EOF`
+
 
 ZSH_THEME="bureau"
 
