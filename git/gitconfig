@@ -4,7 +4,7 @@
 [alias]
 	co = checkout
 	cob = checkout -b
-	wip = commit -am "WIP"i --no-verify
+	wip = commit -am "WIP" --no-verify
 	undo = reset HEAD~1 --mixed
 	amend = commit -a --amend
 	pu=!git fetch origin;git fetch upstream;git merge upstream/master
