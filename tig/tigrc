@@ -1,4 +1,4 @@
-bind main R !git rebase -i %(commit)
+bind main R !git rebase -i --autostash %(commit)
 bind main M !git merge --ff-only %(commit)
 bind main F !sh -c "git commit --fixup=%(commit) --no-verify && git rebase -i --autosquash --autostash %(commit)~"
 
