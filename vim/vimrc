@@ -1,26 +1,118 @@
-set nocompatible
-syntax enable
+set nocompatible              " required
+filetype off                  " required
 
-" show line numbers
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+" Filesystem
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+" Python autocomplete
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'klen/rope-vim'
+" Python syntax
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'hdima/python-syntax'
+" Themes
+Plugin 'freeo/vim-kalisi'
+Plugin 'Haron-Prime/Antares'
+" Coffescript
+Plugin 'kchmck/vim-coffee-script'
+" Jade
+Plugin 'digitaltoad/vim-jade'
+" Less
+Plugin 'groenewege/vim-less'
+
+" Other
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'bling/vim-airline'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'elzr/vim-json'
+Plugin 'majutsushi/tagbar'
+Plugin 'othree/html5.vim'
+
+Plugin 'ervandew/supertab'
+" Golang
+Plugin 'fatih/vim-go'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+Plugin 'carlosvillu/coffeScript-VIM-Snippets'
+    
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+" (via http://stackoverflow.com/a/22253548/1626737)
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+let g:UltiSnipsExpandTrigger           = '<tab>'
+let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+let mapleader=","
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <C-n> :NERDTreeToggle<CR>
+nmap <F8> :TagbarToggle<CR>
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+let python_highlight_all=1
+syntax on
+
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+set splitbelow
+set splitright
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 set number
-
-" set tabs to have 4 spaces
-set ts=4
-
-" indent when moving to the next line while writing code
-set autoindent
-
-" expand tabs into spaces
-set expandtab
-
-" when using the >> or << commands, shift lines by 4 spaces
-set shiftwidth=4
-
-" show a visual line under the cursor's current line 
-set cursorline
-
-" show the matching part of the pair for [] {} and ()
-set showmatch
 
 " Searching
 set hlsearch
@@ -29,17 +121,19 @@ set ignorecase
 set smartcase
 set nospell
 
-let mapleader = ","
 
-" Viewport
-set ruler
-set number
+" Colors
+set t_Co=256
+colorscheme antares
 
 " History
 set history=500
 set undolevels=500
 
-" Vim - easier rebase
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+"Vim easy rebase
 if has("autocmd")
     autocmd Filetype gitcommit setlocal spell textwidth=72
 
@@ -54,56 +148,49 @@ if has("autocmd")
 end
 
 " NERDTree
-map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Vundle
-filetype off 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Draw whitspace
+set list lcs=trail:·,tab:»·
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'chase/vim-ansible-yaml'
-Plugin 'stephpy/vim-yaml'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'klen/python-mode'
-Plugin 'fatih/vim-go'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" no line wrap
+set nowrap
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
 
-call vundle#end()
-
-" Pathogen load
-call pathogen#infect()
-call pathogen#helptags()
-
-filetype plugin indent on
+" Mix system clipboard and vim clipboard
+set clipboard=unnamed
 
 
-" enable all Python syntax highlighting features
-let python_highlight_all = 1 
-let g:pymode_rope = 1
-let g:pymode_rope_complete_on_dot = 1
+set wildignore+=*\\tmp\\*,*.,*.pyc, 
 
-" vim-go settings
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.venv$\|\.svn$\|dist$\|node_modules$\|venv$\|test$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
