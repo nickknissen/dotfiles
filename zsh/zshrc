@@ -4,6 +4,7 @@ export GOPATH=$HOME/go
 PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s 
 $PATH
 $GOPATH/bin
+/usr/local/go/bin
 EOF`
 
 
