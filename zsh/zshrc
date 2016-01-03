@@ -4,6 +4,7 @@ export GOPATH=$HOME/go
 PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s 
 $PATH
 $GOPATH/bin
+/usr/local/go/bin
 EOF`
 
 
@@ -16,3 +17,5 @@ source $ZSH/oh-my-zsh.sh
 [ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm" 
 [ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh" # Load dnvm
 
+
+alias tigref="git reflog --pretty=raw | tig --pretty=raw"
