@@ -114,6 +114,7 @@ bar {
 # {{{ Startup
 exec_always --no-startup-id "feh --bg-scale ~/Pictures/Minimalist-Hexagon-Wallpaper.jpg"
 exec --no-startup-id "pidgin"
+exec --no-startup-id "xrandr --output DFP5 --right-of DFP1"
 # }}}
 
 # {{{ shutdown etc.
