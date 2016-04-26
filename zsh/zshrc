@@ -1,14 +1,26 @@
 export PATH="/usr/local/bin:/Users/nick/bin:$PATH"
 export ZSH=~/.oh-my-zsh
 
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
 ZSH_THEME="bureau"
 
-plugins=(git rvm node rvm ubuntu composer docker go httpie laravel4 laravel5 npm bower virtualenv vagrant docker-compose pip pep8 sudo frontend-search git-extras httpie)
+plugins=(git rvm node composer npm bower vagrant git-extras)
 
 source $ZSH/oh-my-zsh.sh
 
-[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm" 
-[ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh" # Load dnvm
-
-
 alias tigref="git reflog --pretty=raw | tig --pretty=raw"
+
+skip_global_compinit=1
+source $(brew --prefix nvm)/nvm.sh
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
