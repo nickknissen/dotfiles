@@ -44,3 +44,7 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[diff]
+	compactionHeuristic = true
+[commit]
+	verbose = true
