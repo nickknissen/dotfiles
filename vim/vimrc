@@ -5,158 +5,148 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " Filesystem
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'kien/ctrlp.vim'
-" Python autocomplete
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'klen/rope-vim'
-" Python syntax
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" language common
 Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'hdima/python-syntax'
-" Themes
-Plugin 'freeo/vim-kalisi'
+
+" colorscheme
 Plugin 'Haron-Prime/Antares'
-" Coffescript
-Plugin 'kchmck/vim-coffee-script'
-" Jade
-Plugin 'digitaltoad/vim-jade'
-" Less
-Plugin 'groenewege/vim-less'
+Plugin 'twerth/ir_black'
+Plugin 'scwood/vim-hybrid'
+
+" Web
+"Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'csscomb/vim-csscomb'
+Plugin 'posva/vim-vue'
+Plugin 'vim-scripts/Enhanced-Javascript-syntax'
+
+"Plugin 'sheerun/vim-polyglot'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'othree/html5.vim'
+Plugin 'tpope/vim-haml'
+Plugin 'elzr/vim-json'
+Plugin 'JulesWang/css.vim'
+"Plugin 'groenewege/vim-less'
+Plugin 'joonty/vdebug'
+
+
+" PHP
+"Plugin 'git@github.com:dsawardekar/wordpress.vim.git'
+Plugin 'shawncplus/phpcomplete.vim'
+Bundle 'StanAngeloff/php.vim'
+Bundle 'arnaud-lb/vim-php-namespace'
+Plugin 'mkusher/padawan.vim'
 
 " Other
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'elzr/vim-json'
 Plugin 'majutsushi/tagbar'
-Plugin 'othree/html5.vim'
-
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'jwalton512/vim-blade'
+" autocompletion
 Plugin 'ervandew/supertab'
-" Golang
-Plugin 'fatih/vim-go'
+Plugin 'Valloric/YouCompleteMe'
 
-" Track the engine.
+" snippets 
 Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-Plugin 'carlosvillu/coffeScript-VIM-Snippets'
-    
+
+Plugin 'ryanoasis/vim-devicons'
+
 " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 " (via http://stackoverflow.com/a/22253548/1626737)
+
+" SuperTab
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+
 let g:UltiSnipsExpandTrigger           = '<tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_semantic_triggers = {}
+let g:ycm_semantic_triggers.php =
+\ ['->', '::', '(', 'use ', 'namespace ', '\']
 
-" If you want :UltiSnipsEdit to split your window.
+let g:padawan#composer_command = "php /usr/local/bin/composer"
+
+let g:vdebug_options= {
+\    "port" : 9001,
+\    "server" : '',
+\    "timeout" : 20,
+\    "on_close" : 'detach',
+\    "break_on_open" : 1,
+\    "ide_key" : '',
+\    "path_maps" : {},
+\    "debug_window_level" : 0,
+\    "debug_file_level" : 0,
+\    "debug_file" : "",
+\    "watch_window_style" : 'expanded',
+\    "marker_default" : '⬦',
+\    "marker_closed_tree" : '▸',
+\    "marker_open_tree" : '▾'
+\}
+<
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_php_checkers=['php', 'phpmd']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_vue_checkers = ['eslint']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 let g:UltiSnipsEditSplit="vertical"
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+let NERDTreeIgnore=['\.pyc$', '\~$', '\.DS_Store$'] "ignore files in NERDTree
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+au VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+au VimEnter * call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+au VimEnter * call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+au VimEnter * call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+au VimEnter * call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+au VimEnter * call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+au VimEnter * call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+au VimEnter * call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+au VimEnter * call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+au VimEnter * call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+au VimEnter * call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+au VimEnter * call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+au VimEnter * call NERDTreeHighlightFile('rb', 'Red', 'none', '#ffa500', '#151515')
+au VimEnter * call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
-
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
-let mapleader=","
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <C-n> :NERDTreeToggle<CR>
-nmap <F8> :TagbarToggle<CR>
-
-"split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-let python_highlight_all=1
-syntax on
-
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-
-set splitbelow
-set splitright
-
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-set number
-
-" Searching
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set nospell
-
-
-" Colors
-set t_Co=256
-colorscheme antares
-
-" History
-set history=500
-set undolevels=500
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-"Vim easy rebase
-if has("autocmd")
-    autocmd Filetype gitcommit setlocal spell textwidth=72
-
-    " Rebase shortcuts, press P, R, E, S, F to change the current line to the
-    " given command. Press C to cycle through available commands.
-    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> P :Pick<cr>
-    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> R :Reword<cr>
-    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> E :Edit<cr>
-    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> S :Squash<cr>
-    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> F :Fixup<cr>
-    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> C :Cycle<cr>
-end
-
-" NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Draw whitspace
-set list lcs=trail:·,tab:»·
-
-" no line wrap
-set nowrap
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -185,12 +175,104 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
     \ }
 
-" Mix system clipboard and vim clipboard
-set clipboard=unnamed
-
-
-set wildignore+=*\\tmp\\*,*.,*.pyc, 
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.venv$\|\.svn$\|dist$\|node_modules$\|venv$\|test$',
+    \ 'dir':  '\.git$\|\.hg$\|\.venv$\|\.svn$\|dist$\|vendor$\|node_modules$\|public$\|venv$\|test$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
+let g:airline_powerline_fonts=1
+
+let g:ctrlp_working_path_mode = 'ra'
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+
+call vundle#end()
+
+
+au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+let mapleader=","
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <C-n> :NERDTreeToggle<CR>
+nmap <F8> :TagbarToggle<CR>
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+let python_highlight_all=1
+
+set background=dark
+colorscheme ir_black
+
+set t_Co=256
+set history=999
+set undolevels=999
+set list lcs=trail:·,tab:»·
+set clipboard=unnamed
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.pdf,*.bak,*.beam,*.pyc
+set nowrap
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set nospell
+set splitbelow
+set splitright
+set foldmethod=indent
+set foldlevel=99
+set number
+set encoding=utf-8
+set guifont=Sauce\ Code\ Pro\ Light\ Nerd\ Font\ Plus\ Font\ Awesome:h11
+set smartindent
+set autoindent
+
+
+set backupdir=~/.vim/swap
+set dir=~/.vim/swap
+
+if has("gui_macvim")
+    set transparency=15
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+endif
+
+
+if has("autocmd")
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+
+    " Rebase shortcuts, press P, R, E, S, F to change the current line to the
+    " given command. Press C to cycle through available commands.
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> P :Pick<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> R :Reword<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> E :Edit<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> S :Squash<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> F :Fixup<cr>
+    autocmd VimEnter .git/rebase-merge/git-rebase-todo nnoremap <buffer> <silent> C :Cycle<cr>
+
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+    " NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+end
+
+set completeopt=menu,menuone,longest
+set pumheight=10
+
+syntax on
+filetype plugin indent on
