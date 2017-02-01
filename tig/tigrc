@@ -1,14 +1,11 @@
-bind main R !git rebase -i --autostash %(commit)
+bind main r !git rebase -i --autostash %(commit)
 bind main M !git merge --ff-only %(commit)
-bind main F !sh -c "git commit --fixup=%(commit) --no-verify && git rebase -i --autosquash --autostash %(commit)~"
+bind main F !sh -c "git commit --fixup=%(commit) && git rebase -i --autosquash --autostash %(commit)~"
 
 bind status P !git push origin
 bind status S !?git stash save --keep-index %(prompt)
 bind status D !@?rm %(file) #delete selected file
-bind status N !git commit --no-verify
-bind status A !git commit --amend --no-verify
-
-bind refs n !@git branch "%(prompt Enter branch name: )" # create new branch
+bind status A !git commit --amend
 
 bind stash A !?git stash apply %(stash)  # apply selected stash
 
