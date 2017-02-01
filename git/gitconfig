@@ -1,5 +1,5 @@
 [user]
-	email = nick@kindly.dk
+	email = nsn@westsoftdevelopment.dk
 	name = Nick Nissen
 [alias]
 	cob = checkout -b
