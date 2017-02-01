@@ -1,15 +1,7 @@
 export ZSH=~/.oh-my-zsh
 
-export GOPATH=$HOME/golang
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
-export PATH=$HOME/.rvm/bin:$PATH
-#export PATH="/usr/local/bin:$PATH"
 
 ZSH_THEME="bureau"
 
@@ -18,28 +10,4 @@ plugins=(git composer vagrant laravel5)
 source $ZSH/oh-my-zsh.sh
 
 alias tigref="git reflog --pretty=raw | tig --pretty=raw"
-
-skip_global_compinit=1
-if test "$(which brew)"; then
-
-  NVM_INSTALL=$(brew --prefix nvm)
-
-  if [ -d "$NVM_INSTALL" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    . "$NVM_INSTALL/nvm.sh"
-  fi
-fi
-
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [[ -f .nvmrc && -r .nvmrc ]]; then
-    nvm use
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-
 alias local_smtp='python -m smtpd -n -c DebuggingServer localhost:1025'
-
-source ~/.rvm/scripts/rvm
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
