@@ -18,7 +18,7 @@
 [core]
 	excludesfile = /home/nsn/.gitignore_global
 	editor = vim
-	autocrlf = true
+	autocrlf = input
 	whitespace = cr-at-eol
 [push]
 	default = simple
