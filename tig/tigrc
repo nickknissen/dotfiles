@@ -1,18 +1,10 @@
-bind main r !git rebase -i --autostash %(commit)
-bind main M !git merge --ff-only %(commit)
-bind main F !sh -c "git commit --fixup=%(commit) && git rebase -i --autosquash --autostash %(commit)~"
-
+bind status a !?git commit --amend
 bind status P !git push origin
-bind status S !?git stash save --keep-index %(prompt)
-bind status D !@?rm %(file) #delete selected file
-bind status A !git commit --amend
+bind status D !@?rm %(file)
+
+bind main F !sh -c "git commit --fixup=%(commit) && git rebase -i --autosquash --autostash %(commit)~"
+bind main R !git rebase -i %(commit)^ --autostash
+
+bind generic C !git commit -v
 
 bind stash A !?git stash apply %(stash)  # apply selected stash
-
-set main-view = id date author commit-title:graph=yes,refs=yes
-set stash-view  = id:yes,color date:default author:email-user commit-title
-
-set git-colors = no
-set show-changes = yes
-set commit-order = topo
-set refresh-mode = auto

@@ -16,9 +16,10 @@
 	edit = commit --amend --only
 	graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 [core]
-	excludesfile = /home/nkn/.gitignore_global
+	excludesfile = /home/nsn/.gitignore_global
 	editor = vim
-	pager = diff-so-fancy | less --tabs=1,5 -R
+	autocrlf = true
+	whitespace = cr-at-eol
 [push]
 	default = simple
 # so much color

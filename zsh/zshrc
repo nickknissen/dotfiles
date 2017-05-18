@@ -2,12 +2,12 @@ export ZSH=~/.oh-my-zsh
 
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
-ZSH_THEME="bureau"
-
-plugins=(git composer vagrant laravel5)
+ZSH_THEME="materialshell-oceanic"
 
 source $ZSH/oh-my-zsh.sh
 
 alias tigref="git reflog --pretty=raw | tig --pretty=raw"
 alias local_smtp='python -m smtpd -n -c DebuggingServer localhost:1025'
+alias gocode='cd /mnt/c/Users/Nick/code'
