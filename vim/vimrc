@@ -1,7 +1,5 @@
-set nocompatible              " required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
+set nocompatible
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -10,9 +8,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 
-" language common
-
 " colorscheme
+Plugin 'morhetz/gruvbox'
 
 " Web
 Plugin 'cakebaker/scss-syntax.vim'
@@ -22,7 +19,6 @@ Plugin 'posva/vim-vue'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'othree/html5.vim'
 Plugin 'elzr/vim-json'
-Plugin 'cakebaker/scss-syntax.vim'
 
 " Other
 Plugin 'vim-airline/vim-airline'
@@ -40,10 +36,13 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'ryanoasis/vim-devicons'
 
+call vundle#end()
+filetype plugin indent on
 
-" NERDTree
+
+"################# Plugin config #################
+
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.DS_Store$'] "ignore files in NERDTree
-
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
   exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
   exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -65,41 +64,40 @@ au VimEnter * call NERDTreeHighlightFile('rb', 'Red', 'none', '#ffa500', '#15151
 au VimEnter * call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 
+
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.venv$\|\.svn$\|dist$\|vendor$\|node_modules$\|public$\|venv$\|test$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-let g:airline_powerline_fonts=1
-
-let g:ctrlp_working_path_mode = 'ra'
-
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-call vundle#end()
+autocmd BufRead,BufNewFile *.scss set filetype=scss.css
 
-
-au BufRead,BufNewFile *.scss set filetype=scss.css
+syntax on
 
 let mapleader=","
 
 map <C-n> :NERDTreeToggle<CR>
 
-"split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-let python_highlight_all=1
-
 set background=dark
 
+colorscheme gruvbox
 set t_Co=256
+
 set history=999
 set undolevels=999
+
 set list lcs=trail:·,tab:»·
 set clipboard=unnamed
+
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.xpm,*.pdf,*.bak,*.beam,*.pyc
+
 set nowrap
 set hlsearch
 set incsearch
@@ -141,5 +139,9 @@ if has("autocmd")
 end
 
 
-syntax on
-filetype plugin indent on
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
