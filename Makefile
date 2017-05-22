@@ -5,6 +5,7 @@ setup:
 	ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 	ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 	ln -sf ~/.dotfiles/git/gitconfig ~/.gitconfig
+	ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 	cat /mnt/c/Users/Nick/.ssh/id_rsa.pub > ~/.ssh/id_rsa.pub
 	cat /mnt/c/Users/Nick/.ssh/id_rsa > ~/.ssh/id_rsa
 	chmod 600 ~/.ssh/id_rsa
