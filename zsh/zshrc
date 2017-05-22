@@ -10,4 +10,4 @@ source $ZSH/oh-my-zsh.sh
 
 alias tigref="git reflog --pretty=raw | tig --pretty=raw"
 alias local_smtp='python -m smtpd -n -c DebuggingServer localhost:1025'
-alias gocode='cd /mnt/c/Users/Nick/code'
+alias nick='cd /mnt/c/Users/Nick/'
