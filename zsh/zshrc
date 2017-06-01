@@ -4,7 +4,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
-ZSH_THEME="materialshell-oceanic"
+ZSH_THEME="af-magic"
 
 source $ZSH/oh-my-zsh.sh
 
