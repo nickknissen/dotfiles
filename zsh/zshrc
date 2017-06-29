@@ -5,6 +5,7 @@ export PATH=$HOME/.composer/vendor/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 ZSH_THEME="af-magic"
+export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
 
