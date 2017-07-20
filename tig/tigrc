@@ -1,10 +1,19 @@
+# Show git SHAs in main view
+set main-view-id-display = yes
+
+# Refresh views when a modification is detected
+set refresh-mode = auto
+
+# Use UTF-8 characters for graphical elements
+set line-graphics = utf-8
+
+
 bind status a !?git commit --amend
 bind status P !git push origin
 bind status D !@?rm %(file)
 
 bind main F !sh -c "git commit --fixup=%(commit) && git rebase -i --autosquash --autostash %(commit)~"
 bind main R !git rebase -i %(commit)^ --autostash
-
-bind generic C !git commit -v
+bind main m !git commit --reuse-message=%(commit)
 
 bind stash A !?git stash apply %(stash)  # apply selected stash
