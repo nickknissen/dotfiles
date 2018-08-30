@@ -30,6 +30,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'jwalton512/vim-blade'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'pearofducks/ansible-vim'
 
 " snippets 
 Plugin 'SirVer/ultisnips'
@@ -86,10 +87,12 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-set background=dark
 
 colorscheme gruvbox
 set t_Co=256
+set background=dark
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 
 set history=999
 set undolevels=999

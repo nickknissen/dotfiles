@@ -15,11 +15,14 @@
 	amend = commit --amend
 	edit = commit --amend --only
 	graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+	lg = log --color --graph --pretty=longline --abbrev-commit --all
 [core]
 	excludesfile = /home/nsn/.gitignore_global
 	editor = vim
-	autocrlf = input
+	autocrlf = false
 	whitespace = cr-at-eol
+	ignorecase = true
+	eol = lf
 [push]
 	default = simple
 # so much color
@@ -49,3 +52,5 @@
 	compactionHeuristic = true
 [commit]
 	verbose = true
+[pretty]
+	longline = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset

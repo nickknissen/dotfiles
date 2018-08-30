@@ -1,4 +1,4 @@
-.PHONY: setup
+.PHONY: setup clean
 
 setup:
 	ln -sf ~/.dotfiles/tig/tigrc ~/.tigrc
@@ -13,10 +13,18 @@ setup:
 	chmod 600 ~/.ssh/id_rsa
 	chmod 600 ~/.ssh/id_rsa.pub
 	
-	rm -rf ~/.vim/bundle/Vundle.vim
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	#[ ! -d "~/.vim/bundle/Vundle.vim" ] && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	
 	mkdir -p ~/.vim/swap
 	vim +PluginInstall +qall
+
+	echo '#Lauch zsh' >> ~/.bashrc
+	echo 'if [ -t 1 ]; then' >> ~/.bashrc
+	echo '  exec zsh' >> ~/.bashrc
+	echo 'fi' >> ~/.bashrc
+
+	#if [ ! -d "~/.oh-my-zsh/" ]; then git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh; fi
+	chsh -s /bin/zsh
 
 clean:
 	rm -f ~/.tigrc
