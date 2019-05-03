@@ -2,6 +2,7 @@
 	email = nsn@westsoftdevelopment.dk
 	name = Nick Nissen
 [alias]
+	wdiff = !git diff -b
 	cob = checkout -b
 	wip = commit -am "WIP" --no-verify
 	clean-branch = !git remote prune origin && git branch --merged | grep -v master | xargs git branch -d
